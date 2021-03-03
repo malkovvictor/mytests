@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>test123</title>
+</head>
+<body>
+123 543
+<p th:each="post: ${posts}">
+    <span th:text="${post.author.name}"></span> wrote:
+    <span th:text="${post.text}"></span>
+</p>
+</body>
+</html>
