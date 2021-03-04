@@ -1,14 +1,17 @@
 package ru.victormalkov.forumtest.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
-@Entity
+@Data
+@Entity(name="posts")
 public class Post {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JoinColumn(name = "userId")
+    @ManyToOne
     private User author;
 
     private String text;

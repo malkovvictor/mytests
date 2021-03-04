@@ -1,3 +1,5 @@
+import groovy.sql.Sql
+
 plugins {
 	id 'org.springframework.boot' version '2.4.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -12,6 +14,8 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+
+	mybuild
 }
 
 repositories {
@@ -31,8 +35,46 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.3'
+	mybuild 'org.postgresql:postgresql'
 }
 
 test {
 	useJUnitPlatform()
 }
+
+task resetdb {
+	doLast {
+		def sqlClassLoader = Sql.classLoader
+		configurations.mybuild.each { sqlClassLoader.addURL it.toURI().toURL() }
+		def props = [user: 'mytest', password: 'mypass', allowMultiQueries: 'true'] as Properties
+		def url = 'jdbc:postgresql://localhost:5432/testdb'
+		def driver = 'org.postgresql.Driver'
+		def sql = Sql.newInstance(url, props, driver)
+		sql.execute("drop table if exists posts cascade")
+		sql.execute("drop table if exists users cascade")
+		sql.execute("drop sequence if exists hibernate_sequence")
+		sql.close()
+	}
+}
+
+task insertdb {
+	doLast {
+		def sqlClassLoader = Sql.classLoader
+		configurations.mybuild.each { sqlClassLoader.addURL it.toURI().toURL() }
+		def props = [user: 'mytest', password: 'mypass', allowMultiQueries: 'true'] as Properties
+		def url = 'jdbc:postgresql://localhost:5432/testdb'
+		def driver = 'org.postgresql.Driver'
+		def sql = Sql.newInstance(url, props, driver)
+		sql.execute("insert into users(name) values ('qqq www')")
+		sql.execute("insert into users(name) values ('Rr Tt')")
+
+		sql.execute("insert into posts(author_id, text) values (1, 'utochka')")
+		sql.execute("insert into posts(author_id, text) values (1, 'kurochka')")
+		sql.execute("insert into posts(author_id, text) values (1, 'ejoeggjeojojwroe')")
+		sql.execute("insert into posts(author_id, text) values (2, 'qrfefefe')")
+		sql.execute("insert into posts(author_id, text) values (2, 'utochka')")
+
+		sql.close()
+	}
+}
+
