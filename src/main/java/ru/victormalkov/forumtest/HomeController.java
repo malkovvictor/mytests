@@ -20,16 +20,4 @@ public class HomeController {
         model.addAttribute("posts", postRepository.findAll());
         return "home";
     }
-
-    @GetMapping("/registration")
-    public String showRegistrationForm(WebRequest request, Model model) {
-        UserDTO userDTO = new UserDTO();
-        model.addAttribute("user", userDTO);
-        return "register";
-    }
-
-    @PostMapping("/registration")
-    public String addUser(UserDTO userDTO, BindingResult br, Model model) {
-        return "";
-    }
 }
