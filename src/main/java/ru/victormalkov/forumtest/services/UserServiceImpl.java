@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User registerNewAccount(UserDTO userdto) {
-        logger.error("Adding new user: {}", userdto);
+        logger.info("Adding new user: {}", userdto);
         User user = new User();
         user.setName(userdto.getName());
         user.setPassword(userdto.getPassword());

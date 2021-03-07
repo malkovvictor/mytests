@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <a href="/registration">Registration</a>
-    <form class="form-signin" method="post" action="/login">
+    <form class="form-signin" method="post" th:action="@{/login}">
         <h2 class="form-signin-heading">Please sign in</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
@@ -22,7 +22,6 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-        <input name="_csrf" type="hidden" value="1e27f9f3-33a2-4fba-a814-12c21636b171" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
