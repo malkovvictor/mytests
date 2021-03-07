@@ -1,5 +1,6 @@
 package ru.victormalkov.forumtest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,10 @@ import ru.victormalkov.forumtest.services.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class RegistrationController {
-    Logger logger = LoggerFactory.getLogger(getClass());
+  //  Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     UserService userService;
@@ -36,7 +38,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public ModelAndView addUser(
             @ModelAttribute("user") UserDTO userDto, HttpServletRequest request, Errors errors) {
-            logger.info("in adduser");
+            log.info("in adduser");
             //try {
                 User registered = userService.registerNewAccount(userDto);
             //} catch (UserAlreadyExistException uaeEx) {
