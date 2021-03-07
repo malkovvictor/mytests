@@ -41,6 +41,10 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
+bootRun {
+	environment 'spring.output.ansi.console-available', true
+}
+
 test {
 	useJUnitPlatform()
 }
