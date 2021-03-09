@@ -46,14 +46,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/registration").not().fullyAuthenticated()
+        http
+               // .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/registration")
+                    .not().fullyAuthenticated()
+                .antMatchers("/login")
+                    .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login.html")
-                .permitAll()
+                    .loginPage("/login.html")
+                    .permitAll()
+                    .loginProcessingUrl("/process_login")
+                    //.defaultSuccessUrl("/")
                 .and()
-                .logout().permitAll();
+                    .logout().permitAll();
     }
 }
