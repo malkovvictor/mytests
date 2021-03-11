@@ -11,6 +11,7 @@ import ru.victormalkov.forumtest.model.User;
 import ru.victormalkov.forumtest.repository.UserRepository;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @Slf4j
 @Service
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User registerNewAccount(UserDTO userdto) {
+    public User registerNewAccount(@Valid UserDTO userdto) {
         log.info("Adding new user: {}", userdto);
         User user = new User();
         user.setName(userdto.getName());

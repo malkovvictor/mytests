@@ -1,4 +1,6 @@
-package ru.victormalkov.forumtest;
+package ru.victormalkov.forumtest.util;
+
+import ru.victormalkov.forumtest.util.PasswordMatchesValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

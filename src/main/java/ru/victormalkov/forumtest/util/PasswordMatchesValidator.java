@@ -1,4 +1,4 @@
-package ru.victormalkov.forumtest;
+package ru.victormalkov.forumtest.util;
 
 import ru.victormalkov.forumtest.dto.UserDTO;
 
@@ -11,6 +11,7 @@ public class PasswordMatchesValidator
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {
     }
+
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
         UserDTO user = (UserDTO) obj;

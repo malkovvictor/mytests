@@ -1,7 +1,7 @@
 package ru.victormalkov.forumtest.dto;
 
 import lombok.Data;
-import ru.victormalkov.forumtest.PasswordMatches;
+import ru.victormalkov.forumtest.util.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

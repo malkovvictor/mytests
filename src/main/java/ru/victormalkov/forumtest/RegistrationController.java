@@ -37,7 +37,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public ModelAndView addUser(
-            @ModelAttribute("user") UserDTO userDto, HttpServletRequest request, Errors errors) {
+            @ModelAttribute("user") @Valid UserDTO userDto, HttpServletRequest request, Errors errors) {
             //try {
                 User registered = userService.registerNewAccount(userDto);
             //} catch (UserAlreadyExistException uaeEx) {
