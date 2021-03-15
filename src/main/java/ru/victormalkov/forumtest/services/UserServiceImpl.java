@@ -16,8 +16,6 @@ import javax.validation.Valid;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-    //Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private UserRepository userRepository;
 
