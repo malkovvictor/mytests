@@ -23,21 +23,24 @@ import javax.validation.Valid;
 @Slf4j
 @Controller
 public class RegistrationController {
-  //  Logger logger = LoggerFactory.getLogger(getClass());
-
     @Autowired
     UserService userService;
 
     @GetMapping("/registration")
     public String showRegistrationForm(WebRequest request, Model model) {
-        UserDTO userDTO = new UserDTO();
+        final UserDTO userDTO = new UserDTO();
         model.addAttribute("user", userDTO);
         return "register";
     }
 
     @PostMapping("/registration")
-    public ModelAndView addUser(
-            @ModelAttribute("user") @Valid UserDTO userDto, HttpServletRequest request, Errors errors) {
+    public String addUser(
+            @ModelAttribute("user") @Valid UserDTO userDto,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.debug("binding result: {}", bindingResult);
+            return "register";
+        }
             //try {
                 User registered = userService.registerNewAccount(userDto);
             //} catch (UserAlreadyExistException uaeEx) {
@@ -45,7 +48,7 @@ public class RegistrationController {
   //              return mav;
     //        }
 
-            return new ModelAndView("login", "user", userDto);
+            return "login";
     }
 
 }

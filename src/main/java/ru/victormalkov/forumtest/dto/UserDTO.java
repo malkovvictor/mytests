@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@PasswordMatches
+@PasswordMatches(message="{registration.notmatchingpass}")
 public class UserDTO {
     @NotNull
     @NotEmpty
