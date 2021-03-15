@@ -1,6 +1,5 @@
 package ru.victormalkov.forumtest.util;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +21,7 @@ class PasswordMatchesValidatorTest {
         UserDTO dto = new UserDTO();
         dto.setPassword("test password");
         dto.setMatchingPassword("test password");
-        Assertions.assertTrue(myValidator.isValid(dto, null));
+        assertTrue(myValidator.isValid(dto, null));
     }
 
     @Test
@@ -30,6 +29,6 @@ class PasswordMatchesValidatorTest {
         UserDTO dto = new UserDTO();
         dto.setPassword("test password");
         dto.setMatchingPassword("not matching");
-        Assertions.assertFalse(myValidator.isValid(dto, null));
+        assertFalse(myValidator.isValid(dto, null));
     }
 }

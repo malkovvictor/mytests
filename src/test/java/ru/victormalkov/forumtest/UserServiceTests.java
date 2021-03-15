@@ -1,15 +1,21 @@
 package ru.victormalkov.forumtest;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindException;
 import ru.victormalkov.forumtest.dto.UserDTO;
 import ru.victormalkov.forumtest.model.User;
 import ru.victormalkov.forumtest.services.UserService;
+
+import javax.transaction.Transactional;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class UserServiceTests {
@@ -19,7 +25,16 @@ public class UserServiceTests {
     @Autowired
     PasswordEncoder enc;
 
+    private static Validator validator;
+
+    @BeforeAll
+    public static void setupValidator() {
+        ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+        validator = vf.usingContext().getValidator();
+    }
+
     @Test
+    @Transactional
     public void testNewUserCreation() {
         UserDTO dto = new UserDTO();
         dto.setName("Test user 1");
@@ -27,21 +42,11 @@ public class UserServiceTests {
         dto.setMatchingPassword("test pass");
 
         User u = us.registerNewAccount(dto);
-        Assertions.assertNotNull(u);
-        Assertions.assertEquals("Test user 1", u.getName());
-        Assertions.assertTrue(enc.matches("test pass", u.getPassword()));
-        Assertions.assertEquals("ROLE_USER", u.getRole());
-    }
+        assertNotNull(u);
+        assertEquals("Test user 1", u.getName());
+        assertTrue(enc.matches("test pass", u.getPassword()));
+        assertEquals("ROLE_USER", u.getRole());
 
-    @Disabled
-    @Test
-    public void testNewUserCreationWithNotMatchingPassword() {
-        UserDTO dto = new UserDTO();
-        dto.setName("Test user 2");
-        dto.setPassword("test pass");
-        dto.setMatchingPassword("not matching test pass");
-
-        Exception e = Assertions.assertThrows(BindException.class, () -> us.registerNewAccount(dto));
-        Assertions.assertEquals("Passwords don't match", e.getMessage());
+        assertThrows(DataIntegrityViolationException.class, () -> us.registerNewAccount(dto));
     }
 }
