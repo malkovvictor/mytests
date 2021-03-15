@@ -40,13 +40,16 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntime group: 'com.h2database', name: 'h2', version: '1.4.200'
 }
 
 bootRun {
 	environment 'spring.output.ansi.console-available', true
+	systemProperty "spring.profiles.active", 'dev'
 }
 
 test {
+	systemProperty "spring.profiles.active", 'test'
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport // report is always generated after tests run
 }
