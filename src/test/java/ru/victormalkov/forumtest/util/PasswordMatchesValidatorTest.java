@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PasswordMatchesValidatorTest {
-    private PasswordMatchesValidator myValidator;
+    private static PasswordMatchesValidator myValidator;
 
     @BeforeAll
-    public void setup() {
+    public static void setup() {
         myValidator = new PasswordMatchesValidator();
     }
 
