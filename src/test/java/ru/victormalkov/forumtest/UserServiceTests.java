@@ -1,6 +1,7 @@
 package ru.victormalkov.forumtest;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,6 +33,7 @@ public class UserServiceTests {
         Assertions.assertEquals("ROLE_USER", u.getRole());
     }
 
+    @Disabled
     @Test
     public void testNewUserCreationWithNotMatchingPassword() {
         UserDTO dto = new UserDTO();
