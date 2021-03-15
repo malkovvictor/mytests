@@ -17,7 +17,9 @@ public class PasswordMatchesValidator
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context) {
         UserDTO user = (UserDTO) obj;
-        log.debug("Calling password matches validator on {}\nresult should be {}", user, user.getPassword() != null && user.getPassword().equals(user.getMatchingPassword()));
-        return user.getPassword() != null && user.getPassword().equals(user.getMatchingPassword());
+        boolean result = (user.getPassword() == null && user.getMatchingPassword() == null) ||
+                        user.getPassword() != null && user.getPassword().equals(user.getMatchingPassword());
+        log.debug("Calling password matches validator on {}\nresult should be {}", user, result);
+        return result;
     }
 }
