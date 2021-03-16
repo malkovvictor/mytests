@@ -47,6 +47,7 @@ public class UserServiceTests {
         assertTrue(enc.matches("test pass", u.getPassword()));
         assertEquals("ROLE_USER", u.getRole());
 
+        // try to create user with the same name
         assertThrows(DataIntegrityViolationException.class, () -> us.registerNewAccount(dto));
     }
 }
