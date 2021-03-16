@@ -31,4 +31,18 @@ class PasswordMatchesValidatorTest {
         dto.setMatchingPassword("not matching");
         assertFalse(myValidator.isValid(dto, null));
     }
+
+    @Test
+    void passwordMatchesValidator_when_emptyPasswords_then_accept() {
+        UserDTO dto = new UserDTO();
+        dto.setPassword("");
+        dto.setMatchingPassword("");
+        assertTrue(myValidator.isValid(dto, null));
+    }
+
+    @Test
+    void passwordMatchesValidator_when_nullPasswords_then_accept() {
+        UserDTO dto = new UserDTO();
+        assertTrue(myValidator.isValid(dto, null));
+    }
 }
