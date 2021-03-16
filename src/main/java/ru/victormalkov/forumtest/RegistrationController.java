@@ -43,7 +43,7 @@ public class RegistrationController {
   //              return mav;
     //        }
 
-            return "login";
+            return "redirect:/";
     }
 
 }

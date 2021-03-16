@@ -17,7 +17,6 @@ import javax.transaction.Transactional;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
-@Disabled
 @SpringBootTest
 class RegistrationControllerTest {
     @Autowired
@@ -38,7 +37,8 @@ class RegistrationControllerTest {
                 .param("name", "Test user 1")
                 .param("password", "Test password")
                 .param("matchingPassword", "Test password"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/"))
                 .andReturn();
     }
 
@@ -49,7 +49,8 @@ class RegistrationControllerTest {
                 .param("Noname", "Test user 1")
                 .param("password", "Test password")
                 .param("matchingPassword", "Test password"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("register"))
                 .andReturn();
     }
 
@@ -60,7 +61,8 @@ class RegistrationControllerTest {
                 .param("name", "Test user 1")
                 .param("NoPassword", "Test password")
                 .param("matchingPassword", "Test password"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("register"))
                 .andReturn();
     }
 
@@ -71,7 +73,8 @@ class RegistrationControllerTest {
                 .param("name", "Test user 1")
                 .param("password", "Test password")
                 .param("matchingPassword", "Not matching password"))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("register"))
                 .andReturn();
     }
 
