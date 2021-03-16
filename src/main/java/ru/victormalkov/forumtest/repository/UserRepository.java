@@ -6,5 +6,5 @@ import ru.victormalkov.forumtest.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-    public User getUserByName(String name);
+    User getUserByName(String name);
 }
