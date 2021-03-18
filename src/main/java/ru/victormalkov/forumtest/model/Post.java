@@ -22,37 +22,14 @@ public class Post {
     private long id;
 
     @CreatedBy
-    @Nullable
-    private String createdBy;
-
     @ManyToOne
     private User author;
 
     private String text;
-
-    /*@CreatedDate
-    @Temporal(TemporalType.DATE)
-    private Date publicationDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date publicationTime;*/
 
     @CreatedDate
     private Instant publicationTime;
 
     @Nullable
     private Boolean deleted = false;
-
-    @PrePersist
-    protected void onCreate() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof MyUserDetails) {
-            MyUserDetails mud = (MyUserDetails) principal;
-            this.setAuthor(mud.getUser());
-        } else {
-            // TODO: principal is not instanceof MyUserDetails when creating post?
-            log.error("Principal is not instanceof MyUserDetails when creating post! {} - {}", principal.getClass(), principal);
-        }
-    }
-
 }
