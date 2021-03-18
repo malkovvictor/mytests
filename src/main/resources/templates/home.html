@@ -5,10 +5,18 @@
     <title>test123</title>
 </head>
 <body>
-123 543
-<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Logout" />
+<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]
+    <span style="font-weight:normal">
+        (<a href="javascript: document.logoutForm.submit()" role="menuitem">Logout</a>)
+    </span>
+</h3>
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input type="submit" value="Logout" class="link-button" th:hidden="true"/>
+</form>
+<form action="/post" th:action="@{/post}" th:object="${newpost}" method="post">
+    <label th:text="#{label.postarea}">Напишите что-нибудь</label>
+    <textarea th:field="*{text}"></textarea>
+    <button type="submit" th:text="#{label.newpost.submit}">submit</button>
 </form>
 <p th:each="post: ${posts}">
     <span th:text="${post.author.name}"></span> wrote:
