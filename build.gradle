@@ -41,6 +41,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly group: 'com.h2database', name: 'h2', version: '1.4.200'
+	implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 }
 
 bootRun {
