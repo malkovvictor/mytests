@@ -37,7 +37,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.4.3'
 	mybuild 'org.postgresql:postgresql'
-
+	implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly group: 'com.h2database', name: 'h2', version: '1.4.200'
@@ -55,7 +55,7 @@ test {
 }
 
 jacocoTestReport {
-	dependsOn test // tests are required to run before generating the report
+	//dependsOn test // tests are required to run before generating the report
 }
 
 task resetdb {

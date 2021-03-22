@@ -7,8 +7,7 @@ import org.springframework.context.ApplicationContext;
 import ru.victormalkov.forumtest.services.UserService;
 import ru.victormalkov.forumtest.services.UserServiceImpl;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ForumtestApplicationTests {
@@ -22,7 +21,5 @@ class ForumtestApplicationTests {
 
 		HomeController hc = ctx.getBean(HomeController.class);
 		assertNotNull(hc);
-
 	}
-
 }
