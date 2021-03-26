@@ -1,5 +1,6 @@
 package ru.victormalkov.forumtest.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
+@Slf4j
 @Configuration
 public class LocalizationSettings implements WebMvcConfigurer {
     @Bean
@@ -20,6 +22,7 @@ public class LocalizationSettings implements WebMvcConfigurer {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         Locale defaultLocale = new Locale("ru");
         slr.setDefaultLocale(defaultLocale);
+        log.debug("set default locale to " + defaultLocale);
         return slr;
     }
 
