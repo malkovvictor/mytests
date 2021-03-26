@@ -1,1 +1,1 @@
-sudo docker-compose down && ./gradlew clean bootJar && sudo docker-compose up --build
+docker-compose down && ./gradlew clean bootJar && docker-compose up --build
